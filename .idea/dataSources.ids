@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - mydb@localhost" uuid="19b779e8-6cf4-4b02-b4f4-81605b7a8659">
+    <database-info product="MySQL" version="5.6.17" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="mydb"/>
+    <table name="autor" schema="" catalog="mydb" type="TABLE">
+      <column name="id_Autor" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Nombre" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Nacionalidad" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id_Autor"/>
+      <exported-key name="fk_Autor_has_Documental_Autor1" table="autor_has_documental" schema="" catalog="mydb" columns="Autor_id_Autor"/>
+      <exported-key name="fk_Autor_has_Libro_Autor1" table="autor_has_libro" schema="" catalog="mydb" columns="Autor_id_Autor"/>
+      <exported-key name="fk_Libro_digital_has_Autor_Autor1" table="libro_digital_has_autor" schema="" catalog="mydb" columns="Autor_id_Autor"/>
+    </table>
+    <table name="autor_has_documental" schema="" catalog="mydb" type="TABLE">
+      <column name="Autor_id_Autor" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Documental_id_Documental" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="Autor_id_Autor,Documental_id_Documental"/>
+      <foreign-key name="fk_Autor_has_Documental_Autor1" columns="Autor_id_Autor" ref-table="autor" ref-schema="" ref-catalog="mydb" ref-columns="id_Autor" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_Autor_has_Documental_Documental1" columns="Documental_id_Documental" ref-table="documental" ref-schema="" ref-catalog="mydb" ref-columns="id_Documental" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_Autor_has_Documental_Autor1_idx" unique="false" columns="Autor_id_Autor"/>
+      <index name="fk_Autor_has_Documental_Documental1_idx" unique="false" columns="Documental_id_Documental"/>
+    </table>
+    <table name="autor_has_libro" schema="" catalog="mydb" type="TABLE">
+      <column name="Autor_id_Autor" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Libro_id_Libro" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="Autor_id_Autor,Libro_id_Libro"/>
+      <foreign-key name="fk_Autor_has_Libro_Autor1" columns="Autor_id_Autor" ref-table="autor" ref-schema="" ref-catalog="mydb" ref-columns="id_Autor" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_Autor_has_Libro_Libro1" columns="Libro_id_Libro" ref-table="libro" ref-schema="" ref-catalog="mydb" ref-columns="id_Libro" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_Autor_has_Libro_Autor1_idx" unique="false" columns="Autor_id_Autor"/>
+      <index name="fk_Autor_has_Libro_Libro1_idx" unique="false" columns="Libro_id_Libro"/>
+    </table>
+    <table name="carnet" schema="" catalog="mydb" type="TABLE">
+      <column name="id_Carnet" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Codigo" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Usuario_id_Usuario" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id_Carnet,Usuario_id_Usuario"/>
+      <foreign-key name="fk_Carnet_Usuario1" columns="Usuario_id_Usuario" ref-table="usuario" ref-schema="" ref-catalog="mydb" ref-columns="id_Usuario" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_Carnet_Usuario1_idx" unique="false" columns="Usuario_id_Usuario"/>
+    </table>
+    <table name="documental" schema="" catalog="mydb" type="TABLE">
+      <column name="id_Documental" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Titulo" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Ejemplar" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id_Documental"/>
+      <exported-key name="fk_Autor_has_Documental_Documental1" table="autor_has_documental" schema="" catalog="mydb" columns="Documental_id_Documental"/>
+      <exported-key name="fk_Documental_has_Tema_Documental1" table="documental_has_tema" schema="" catalog="mydb" columns="Documental_id_Documental"/>
+      <exported-key name="fk_Prestamos_Documental1" table="prestamos" schema="" catalog="mydb" columns="Documental_id_Documental"/>
+      <exported-key name="fk_Usuario_Documental1" table="usuario" schema="" catalog="mydb" columns="Documental_id_Documental"/>
+    </table>
+    <table name="documental_has_tema" schema="" catalog="mydb" type="TABLE">
+      <column name="Documental_id_Documental" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Tema_id_Tema" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="Documental_id_Documental,Tema_id_Tema"/>
+      <foreign-key name="fk_Documental_has_Tema_Documental1" columns="Documental_id_Documental" ref-table="documental" ref-schema="" ref-catalog="mydb" ref-columns="id_Documental" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_Documental_has_Tema_Tema1" columns="Tema_id_Tema" ref-table="tema" ref-schema="" ref-catalog="mydb" ref-columns="id_Tema" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_Documental_has_Tema_Documental1_idx" unique="false" columns="Documental_id_Documental"/>
+      <index name="fk_Documental_has_Tema_Tema1_idx" unique="false" columns="Tema_id_Tema"/>
+    </table>
+    <table name="editoriales" schema="" catalog="mydb" type="TABLE">
+      <column name="id_Editoriales" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Nombre" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Direccion" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id_Editoriales"/>
+      <exported-key name="fk_Libro_Editoriales1" table="libro" schema="" catalog="mydb" columns="Editoriales_id_Editoriales"/>
+      <exported-key name="fk_Libro_digital_Editoriales1" table="libro_digital" schema="" catalog="mydb" columns="Editoriales_id_Editoriales"/>
+      <index name="Direccion_UNIQUE" unique="true" columns="Direccion"/>
+    </table>
+    <table name="empleados" schema="" catalog="mydb" type="TABLE">
+      <column name="id_empleado" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Nombre" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Codigo" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id_empleado"/>
+      <index name="idempleado_UNIQUE" unique="true" columns="id_empleado"/>
+    </table>
+    <table name="estanteria" schema="" catalog="mydb" type="TABLE">
+      <column name="id__Estanteria" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Codigo" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Lugar" sqlType="VARCHAR" precision="300" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id__Estanteria"/>
+      <exported-key name="fk_Libro_Estanteria1" table="libro" schema="" catalog="mydb" columns="Estanteria_id__Estanteria"/>
+      <index name="Codigo_UNIQUE" unique="true" columns="Codigo"/>
+    </table>
+    <table name="libro" schema="" catalog="mydb" type="TABLE">
+      <column name="id_Libro" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Titulo" sqlType="VARCHAR" precision="70" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ISBN" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Ejemplares" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Editoriales_id_Editoriales" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Estanteria_id__Estanteria" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id_Libro"/>
+      <foreign-key name="fk_Libro_Editoriales1" columns="Editoriales_id_Editoriales" ref-table="editoriales" ref-schema="" ref-catalog="mydb" ref-columns="id_Editoriales" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_Libro_Estanteria1" columns="Estanteria_id__Estanteria" ref-table="estanteria" ref-schema="" ref-catalog="mydb" ref-columns="id__Estanteria" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_Autor_has_Libro_Libro1" table="autor_has_libro" schema="" catalog="mydb" columns="Libro_id_Libro"/>
+      <exported-key name="fk_Libro_has_Tema_Libro1" table="libro_has_tema" schema="" catalog="mydb" columns="Libro_id_Libro"/>
+      <exported-key name="fk_Prestamos_Libro1" table="prestamos" schema="" catalog="mydb" columns="Libro_id_Libro"/>
+      <index name="fk_Libro_Editoriales1_idx" unique="false" columns="Editoriales_id_Editoriales"/>
+      <index name="fk_Libro_Estanteria1_idx" unique="false" columns="Estanteria_id__Estanteria"/>
+    </table>
+    <table name="libro_digital" schema="" catalog="mydb" type="TABLE">
+      <column name="id_Libro_digital" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Titulo" sqlType="VARCHAR" precision="70" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ISBN" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Editoriales_id_Editoriales" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id_Libro_digital"/>
+      <foreign-key name="fk_Libro_digital_Editoriales1" columns="Editoriales_id_Editoriales" ref-table="editoriales" ref-schema="" ref-catalog="mydb" ref-columns="id_Editoriales" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_Libro_digital_has_Autor_Libro_digital1" table="libro_digital_has_autor" schema="" catalog="mydb" columns="Libro_digital_id_Libro_digital"/>
+      <index name="fk_Libro_digital_Editoriales1_idx" unique="false" columns="Editoriales_id_Editoriales"/>
+    </table>
+    <table name="libro_digital_has_autor" schema="" catalog="mydb" type="TABLE">
+      <column name="Libro_digital_id_Libro_digital" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Autor_id_Autor" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="Libro_digital_id_Libro_digital,Autor_id_Autor"/>
+      <foreign-key name="fk_Libro_digital_has_Autor_Libro_digital1" columns="Libro_digital_id_Libro_digital" ref-table="libro_digital" ref-schema="" ref-catalog="mydb" ref-columns="id_Libro_digital" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_Libro_digital_has_Autor_Autor1" columns="Autor_id_Autor" ref-table="autor" ref-schema="" ref-catalog="mydb" ref-columns="id_Autor" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_Libro_digital_has_Autor_Autor1_idx" unique="false" columns="Autor_id_Autor"/>
+      <index name="fk_Libro_digital_has_Autor_Libro_digital1_idx" unique="false" columns="Libro_digital_id_Libro_digital"/>
+    </table>
+    <table name="libro_has_tema" schema="" catalog="mydb" type="TABLE">
+      <column name="Libro_id_Libro" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Tema_id_Tema" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="Libro_id_Libro,Tema_id_Tema"/>
+      <foreign-key name="fk_Libro_has_Tema_Libro1" columns="Libro_id_Libro" ref-table="libro" ref-schema="" ref-catalog="mydb" ref-columns="id_Libro" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_Libro_has_Tema_Tema1" columns="Tema_id_Tema" ref-table="tema" ref-schema="" ref-catalog="mydb" ref-columns="id_Tema" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_Libro_has_Tema_Libro1_idx" unique="false" columns="Libro_id_Libro"/>
+      <index name="fk_Libro_has_Tema_Tema1_idx" unique="false" columns="Tema_id_Tema"/>
+    </table>
+    <table name="periodicos" schema="" catalog="mydb" type="TABLE">
+      <column name="id_Periodicos" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Fecha_publicacion" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="Nombre" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cantidad" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id_Periodicos"/>
+      <exported-key name="fk_Prestamos_Periodicos1" table="prestamos" schema="" catalog="mydb" columns="Periodicos_id_Periodicos"/>
+      <exported-key name="fk_Usuario_Periodicos1" table="usuario" schema="" catalog="mydb" columns="Periodicos_id_Periodicos"/>
+      <index name="Nombre_UNIQUE" unique="true" columns="Nombre"/>
+    </table>
+    <table name="prestamos" schema="" catalog="mydb" type="TABLE">
+      <column name="fecha_prestamo" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="fecha_devolucion" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="fecha_limite" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="multa" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Usuario_id_Usuario" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Libro_id_Libro" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Periodicos_id_Periodicos" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Documental_id_Documental" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="Usuario_id_Usuario"/>
+      <foreign-key name="fk_Prestamos_Usuario" columns="Usuario_id_Usuario" ref-table="usuario" ref-schema="" ref-catalog="mydb" ref-columns="id_Usuario" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_Prestamos_Libro1" columns="Libro_id_Libro" ref-table="libro" ref-schema="" ref-catalog="mydb" ref-columns="id_Libro" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_Prestamos_Periodicos1" columns="Periodicos_id_Periodicos" ref-table="periodicos" ref-schema="" ref-catalog="mydb" ref-columns="id_Periodicos" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_Prestamos_Documental1" columns="Documental_id_Documental" ref-table="documental" ref-schema="" ref-catalog="mydb" ref-columns="id_Documental" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_Prestamos_Documental1_idx" unique="false" columns="Documental_id_Documental"/>
+      <index name="fk_Prestamos_Libro1_idx" unique="false" columns="Libro_id_Libro"/>
+      <index name="fk_Prestamos_Periodicos1_idx" unique="false" columns="Periodicos_id_Periodicos"/>
+    </table>
+    <table name="tema" schema="" catalog="mydb" type="TABLE">
+      <column name="id_Tema" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Nombre" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Descripcion" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id_Tema"/>
+      <exported-key name="fk_Documental_has_Tema_Tema1" table="documental_has_tema" schema="" catalog="mydb" columns="Tema_id_Tema"/>
+      <exported-key name="fk_Libro_has_Tema_Tema1" table="libro_has_tema" schema="" catalog="mydb" columns="Tema_id_Tema"/>
+      <index name="Nombre_UNIQUE" unique="true" columns="Nombre"/>
+    </table>
+    <table name="usuario" schema="" catalog="mydb" type="TABLE">
+      <column name="id_Usuario" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="DNI" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Nombre" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Carnet_id" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Correo" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Documental_id_Documental" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Periodicos_id_Periodicos" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id_Usuario"/>
+      <foreign-key name="fk_Usuario_Documental1" columns="Documental_id_Documental" ref-table="documental" ref-schema="" ref-catalog="mydb" ref-columns="id_Documental" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_Usuario_Periodicos1" columns="Periodicos_id_Periodicos" ref-table="periodicos" ref-schema="" ref-catalog="mydb" ref-columns="id_Periodicos" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_Carnet_Usuario1" table="carnet" schema="" catalog="mydb" columns="Usuario_id_Usuario"/>
+      <exported-key name="fk_Prestamos_Usuario" table="prestamos" schema="" catalog="mydb" columns="Usuario_id_Usuario"/>
+      <index name="Carnet_id_UNIQUE" unique="true" columns="Carnet_id"/>
+      <index name="Correo_UNIQUE" unique="true" columns="Correo"/>
+      <index name="DNI_UNIQUE" unique="true" columns="DNI"/>
+      <index name="fk_Usuario_Documental1_idx" unique="false" columns="Documental_id_Documental"/>
+      <index name="fk_Usuario_Periodicos1_idx" unique="false" columns="Periodicos_id_Periodicos"/>
+    </table>
+  </data-source>
+</component>
