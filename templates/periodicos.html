@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block contenedor %}
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h3 align="center">Periodicos</h3>
+        </div>
+
+
+        <table class="table">
+            <thead>
+            <tr role="row">
+                <th>Nombre</th>
+                <th>Fecha de publicacion</th>
+                <th>Cantidad</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for periodico in periodicos %}
+                <tr>
+                    <td>
+                        <p>
+                            {{ periodico.nombre }}
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            {{ periodico.fecha_publicacion }}
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            {{ periodico.cantidad }}
+                        </p>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

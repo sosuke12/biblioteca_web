@@ -21,7 +21,7 @@ class Autor(models.Model):
 
     class Meta:
         
-        db_table = 'autor'
+        db_table = 'Autor'
 
 
 class AutorHasLibro(models.Model):
@@ -33,7 +33,7 @@ class AutorHasLibro(models.Model):
 
     class Meta:
         
-        db_table = 'autor_has_libro'
+        db_table = 'Autor_has_Libro'
 
 
 class Carnet(models.Model):
@@ -42,7 +42,7 @@ class Carnet(models.Model):
     usuario_id_usuario = models.OneToOneField('Usuario', db_column='Usuario_id_Usuario')  # Field name made lowercase.
 
     class Meta:
-        db_table = 'carnet'
+        db_table = 'Carnet'
 
 
 class Documental(models.Model):
@@ -53,7 +53,7 @@ class Documental(models.Model):
     temas = models.ManyToManyField('Tema', through='DocumentalHasTema')
 
     class Meta:
-        db_table = 'documental'
+        db_table = 'Documental'
 
 class DocumentalHasTema(models.Model):
     documental_id_documental = models.ForeignKey(Documental, db_column='Documental_id_Documental', primary_key=True)  # Field name made lowercase.
@@ -63,7 +63,7 @@ class DocumentalHasTema(models.Model):
         pass
 
     class Meta:
-        db_table = 'documental_has_tema'
+        db_table = 'Documental_has_Tema'
 
 
 class Editoriales(models.Model):
@@ -73,7 +73,7 @@ class Editoriales(models.Model):
 
     class Meta:
         
-        db_table = 'editoriales'
+        db_table = 'Editoriales'
 
 
 class Empleados(models.Model):
@@ -83,7 +83,7 @@ class Empleados(models.Model):
 
     class Meta:
         
-        db_table = 'empleados'
+        db_table = 'Empleados'
 
 
 class Estanteria(models.Model):
@@ -93,7 +93,7 @@ class Estanteria(models.Model):
 
     class Meta:
         
-        db_table = 'estanteria'
+        db_table = 'Estanteria'
 
 
 class Libro(models.Model):
@@ -109,7 +109,7 @@ class Libro(models.Model):
 
     class Meta:
         
-        db_table = 'libro'
+        db_table = 'Libro'
 
 
 class LibroDigital(models.Model):
@@ -122,7 +122,7 @@ class LibroDigital(models.Model):
 
     class Meta:
         
-        db_table = 'libro_digital'
+        db_table = 'Libro_digital'
 
 
 class LibroDigitalHasAutor(models.Model):
@@ -134,7 +134,7 @@ class LibroDigitalHasAutor(models.Model):
         pass
 
     class Meta:
-        db_table = 'libro_digital_has_autor'
+        db_table = 'Libro_digital_has_Autor'
 
 
 class LibroHasTema(models.Model):
@@ -145,7 +145,7 @@ class LibroHasTema(models.Model):
         pass
 
     class Meta:
-        db_table = 'libro_has_tema'
+        db_table = 'Libro_has_Tema'
 
 
 class Periodicos(models.Model):
@@ -156,7 +156,7 @@ class Periodicos(models.Model):
 
     class Meta:
         
-        db_table = 'periodicos'
+        db_table = 'Periodicos'
 
 
 class Prestamos(models.Model):
@@ -170,7 +170,7 @@ class Prestamos(models.Model):
     documental_id_documental = models.ForeignKey(Documental, db_column='Documental_id_Documental', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        db_table = 'prestamos'
+        db_table = 'Prestamos'
 
 
 class Tema(models.Model):
@@ -180,7 +180,7 @@ class Tema(models.Model):
 
     class Meta:
         
-        db_table = 'tema'
+        db_table = 'Tema'
 
 
 class Usuario(models.Model):
@@ -194,4 +194,4 @@ class Usuario(models.Model):
 
     class Meta:
         
-        db_table = 'usuario'
+        db_table = 'Usuario'

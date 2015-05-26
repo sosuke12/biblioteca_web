@@ -15,7 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from pagina import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^/?$', views.IndexView.as_view(), name='index_url'),
+    url(r'^login/?$', views.LoginView.as_view(), name='login_url'),
+    url(r'^listar/libros/?$', views.LibroView.as_view(), name='libro_url'),
+    url(r'^listar/documentales/?$', views.DocumentalView.as_view(), name='documental_url'),
+    url(r'^listar/libros_digitales/?$', views.LibroDigitalView.as_view(), name='libro_digital_url'),
+    url(r'^listar/periodicos/?$', views.PeriodicoView.as_view(), name='periodico_url'),
+    url(r'^registrarse/?$', views.RegitrarseView.as_view(), name='registro_url'),
+    url(r'^multa/?$', views.MultaView.as_view(), name='registro_url'),
+    url(r'^prestamo/?$', views.PrestamoView.as_view(), name='registro_url'),
 ]

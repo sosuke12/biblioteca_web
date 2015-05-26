@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block contenedor %}
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h3 align="center">Documentales</h3>
+        </div>
+
+
+        <table class="table">
+            <thead>
+            <tr role="row">
+                <th>Titulo</th>
+                <th>Temas</th>
+                <th>Ejemplares disponibles</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for documental in documentales%}
+                <tr>
+                    <td>
+                        <p>
+                            {{ documental.titulo }}
+                        </p>
+                    </td>
+                    <td>
+                        <ul>
+                            {% for tema in documental.temas %}
+                                <li>
+                                    <p>
+                                        {{ tema.nombre }}
+                                    </p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <p>
+                            {{ documental.ejemplares }}
+                        </p>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

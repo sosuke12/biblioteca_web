@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block contenedor %}
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h3 align="center">Libros</h3>
+        </div>
+
+
+        <table class="table">
+            <thead>
+            <tr role="row">
+                <th>ISBN</th>
+                <th>Titulo</th>
+                <th>Temas</th>
+                <th>Autor</th>
+                <th>Editorial</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for libro in libros %}
+                <tr>
+                    <td>
+                        <p>
+                            {{ libro.isbn }}
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            {{ libro.titulo }}
+                        </p>
+                    </td>
+                    <td>
+                        <ul>
+                            {% for tema in libro.temas %}
+                                <li>
+                                    <p>
+                                        {{ tema.nombre }}
+                                    </p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            {% for autor in libro.autores %}
+                                <li>
+                                    <p>
+                                        {{ autor.nombre }}
+                                    </p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <p>
+                            {{ libro.editoriales_id_editoriales.nombre }}
+                        </p>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

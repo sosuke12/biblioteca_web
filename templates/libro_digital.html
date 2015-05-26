@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block contenedor %}
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h3 align="center">Libros digitales</h3>
+        </div>
+
+
+        <table class="table">
+            <thead>
+            <tr role="row">
+                <th>ISBN</th>
+                <th>Titulo</th>
+                <th>Temas</th>
+                <th>Autores</th>
+                <th>Editorial</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for libro_digital in libros_digitales %}
+                <tr>
+                    <td>
+                        <p>
+                            {{ libro_digital.isbn }}
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            {{ libro_digital.titulo }}
+                        </p>
+                    </td>
+                    <td>
+                        <ul>
+                            {% for tema in libro_digital.temas %}
+                                <li>
+                                    <p>
+                                        {{ tema.nombre }}
+                                    </p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            {% for autor in libro_digital.autores %}
+                                <li>
+                                    <p>
+                                        {{ autor.nombre }}
+                                    </p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <p>
+                            {{ libro_digital.editoriales_id_editoriales.nombre }}
+                        </p>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

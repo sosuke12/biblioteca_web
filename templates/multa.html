@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block contenedor %}
+    <div class="col-lg-3" style="float: none; margin: 30px auto">
+        {% if prestamo.multa %}
+            Señor usuario, lamentamos informarle que es acredor de una multa total de {{ prestamo.multa }}
+        {% else %}
+            Felicitaciones no posee ninguna multa.
+        {% endif %}
+    </div>
+{% endblock %}

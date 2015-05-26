@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/static/css/estilo.css" rel="stylesheet">
+    <title>Biblioteca</title>
+</head>
+<body>
+
+<header>
+    <div class="col-lg-5" style="width: 40%; display: inline-block">
+        <br>
+        <h1 class="titulo"> Biblioteca educativa</h1>
+    </div>
+    {% if user.is_authenticated %}
+    {% else %}
+        <form name="formulario_logueo"  class="elemento_logueo" style="width: 50%">
+            <p class="form-inline">
+                <label for="username_id" style="margin-right: 9px"> Usuario : </label>
+                <input name="username" id="username_id" type="text" class="form-control">
+            </p>
+            <p class="form-inline">
+                <label for="password_id"> Password: </label>
+                <input name="password" id="password_id" type="password" class="form-control">
+            </p>
+
+        </form>
+    {% endif %}
+    <div>
+        <ul>
+            {% if user.is_authenticated %}
+                <li><a href="/listar/libros/">Libros </a> | </li>
+                <li><a href="/listar/documentales/">Documentales </a> | </li>
+                <li><a href="/listar/libros_digitales/">Libros digitales </a> | </li>
+                <li><a href="/listar/periodico/">Periodicos</a></li>
+                <li><a href="/prestamo/">Ver prestamo</a></li>
+                <li><a href="/multa/">Ver multa</a></li>
+            {% else %}
+                <li><a href="/acerca_nosotros/">Acerca de nosotros</a> | </li>
+                <li><a href="/registrarse/">Registrarse</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</header>
+
+<div class="contenedor">
+    {% block contenedor %}
+        <div class="col-lg-3" style="float: none; margin: 30px auto">
+            Bienvenido a la biblioteca educativa, aqui encontraras los libros disponibles para tu educacion por favor
+            suministre los datos que sean requeridps para hacer la administración necesaria de la biblioteca de su
+            parte.
+        </div>
+    {% endblock %}
+</div>
+
+<footer>
+
+</footer>
+
+</body>
+</html>

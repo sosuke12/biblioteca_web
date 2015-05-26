@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block contenedor %}
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h3 align="center">Prestamo</h3>
+        </div>
+
+
+        <table class="table">
+            <thead>
+            <tr role="row">
+                <th>Material prestado</th>
+                <th>Fecha prestamo</th>
+                <th>Fecha devolución</th>
+                <th>Fecha limite</th>
+                {% if prestamo.multa %}
+                    <th>Multa</th>
+                {% endif %}
+            </tr>
+            </thead>
+            <tbody>
+            {% if prestamo %}
+                <tr>
+                    <td>
+                        <p>
+                            {{ prestamo }}
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            {{ prestamo.fecha_prestamo }}
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            {{ prestamo.fecha_devolucion }}
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            {{ prestamo.fecha_limite }}
+                        </p>
+                    </td>
+
+                    {% if prestamo.multa %}
+                        <td>
+                            <p>
+                                {{ prestamo.multa }}
+                            </p>
+                        </td>
+                    {% endif %}
+
+                </tr>
+            {% else %}
+                <tr>
+                    Usted no posee ningun prestamo.
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
