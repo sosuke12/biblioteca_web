@@ -18,10 +18,24 @@ class Autor(models.Model):
     nacionalidad = models.CharField(db_column='Nacionalidad', max_length=45)  # Field name made lowercase.
 
     libros = models.ManyToManyField('Libro', through='AutorHasLibro')
+    libros_digitales = models.ManyToManyField('LibroDigital', through='LibroDigitalHasAutor')
+    documentales = models.ManyToManyField('Documental', through='AutorHasDocumental')
 
     class Meta:
         
         db_table = 'Autor'
+
+
+class AutorHasDocumental(models.Model):
+    autor_id_autor = models.ForeignKey(Autor, db_column='Autor_id_Autor', primary_key=True)  # Field name made lowercase.
+    documental_id_documental = models.ForeignKey('Documental', db_column='Documental_id_Documental', primary_key=True)  # Field name made lowercase.
+
+    def validate_unique(self, exclude=None):
+        pass
+
+    class Meta:
+        
+        db_table = 'Autor_has_Documental'
 
 
 class AutorHasLibro(models.Model):
@@ -32,7 +46,7 @@ class AutorHasLibro(models.Model):
         pass
 
     class Meta:
-        
+
         db_table = 'Autor_has_Libro'
 
 
@@ -177,6 +191,9 @@ class Tema(models.Model):
     id_tema = models.AutoField(db_column='id_Tema', primary_key=True)  # Field name made lowercase.
     nombre = models.CharField(db_column='Nombre', unique=True, max_length=45)  # Field name made lowercase.
     descripcion = models.CharField(db_column='Descripcion', max_length=45, blank=True, null=True)  # Field name made lowercase.
+
+    libros = models.ManyToManyField(Libro, through='LibroHasTema')
+    documentales = models.ManyToManyField(Documental, through='DocumentalHasTema')
 
     class Meta:
         

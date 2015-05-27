@@ -1,6 +1,28 @@
 {% extends 'base.html' %}
 
 {% block contenedor %}
+
+    <br>
+
+    <form method="get" action="/listar/periodicos/">
+        <p  style="display: inline-block" class="form-inline">
+            <label for="nombre_id">
+                Nombre :
+            </label>
+            <input type="text" name="nombre" id="nombre_id" class="form-control">
+        </p>
+        <button class="glyphicon glyphicon-search" style="display: inline-block; height: 30px">
+        </button>
+    </form>
+
+
+    {% for query in queries %}
+        <p>
+        {{ query }}
+        </p>
+        <br>
+    {% endfor %}
+
     <div class="panel panel-default">
 
         <div class="panel-heading">

@@ -1,6 +1,34 @@
 {% extends 'base.html' %}
 
 {% block contenedor %}
+
+    <br>
+
+    <form method="get" action="/listar/documentales/">
+        <p  style="display: inline-block" class="form-inline">
+            <label for="titulo_id">
+                Titulo :
+            </label>
+            <input type="text" name="titulo" id="titulo_id" class="form-control">
+        </p>
+        <p  style="display: inline-block" class="form-inline">
+            <label for="tema_id">
+                Tema :
+            </label>
+            <input type="text" name="tema" id="tema_id" class="form-control">
+        </p>
+        <button class="glyphicon glyphicon-search" style="display: inline-block; height: 30px">
+        </button>
+    </form>
+
+
+    {% for query in queries %}
+        <p>
+        {{ query }}
+        </p>
+        <br>
+    {% endfor %}
+
     <div class="panel panel-default">
 
         <div class="panel-heading">
@@ -13,6 +41,7 @@
             <tr role="row">
                 <th>Titulo</th>
                 <th>Temas</th>
+                <th>Autores</th>
                 <th>Ejemplares disponibles</th>
             </tr>
             </thead>
@@ -26,10 +55,21 @@
                     </td>
                     <td>
                         <ul>
-                            {% for tema in documental.temas %}
+                            {% for tema in documental.temas.all %}
                                 <li>
                                     <p>
                                         {{ tema.nombre }}
+                                    </p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            {% for autor in documental.autores.all %}
+                                <li>
+                                    <p>
+                                        {{ autor.nombre }}
                                     </p>
                                 </li>
                             {% endfor %}

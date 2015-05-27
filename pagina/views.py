@@ -125,8 +125,26 @@ class LibroView(base.View):
 
     def get(self, request, *args, **kwargs):
         libros = Libro.objects.all()
+
+        get_keys = request.GET.keys()
+
+        queries = [libros.query]
+
+        if 'autor' in get_keys:
+            libros = libros.filter(pk__in=Autor.objects.filter(nombre__icontains=request.GET['autor']).values('libros'))
+            queries.append(libros.query)
+
+        if 'tema' in get_keys:
+            libros = libros.filter(pk__in=Tema.objects.filter(nombre__icontains=request.GET['tema']).values('libros'))
+            queries.append(libros.query)
+
+        if 'libro' in get_keys:
+            libros = libros.filter(titulo__icontains=request.GET['libro'])
+            queries.append(libros.query)
+
         ctx = {
-            'libros': libros
+            'libros': libros,
+            'queries': []
         }
         return render(request, 'libros.html', ctx)
 
@@ -141,8 +159,24 @@ class DocumentalView(base.View):
 
     def get(self, request, *args, **kwargs):
         documentales = Documental.objects.all()
+
+        queries = [documentales.query]
+
+        get_keys = request.GET.keys()
+
+        if 'tema' in get_keys:
+            documentales = documentales.filter(
+                pk__in=Tema.objects.filter(nombre__icontains=request.GET['tema']).values('documentales')
+            )
+            queries.append(documentales.query)
+
+        if 'titulo' in get_keys:
+            documentales = documentales.filter(titulo__icontains=request.GET['titulo'])
+            queries.append(documentales.query)
+
         ctx = {
-            'documentales': documentales
+            'documentales': documentales,
+            'queries': queries
         }
         return render(request, 'documentales.html', ctx)
 
@@ -156,8 +190,23 @@ class DocumentalView(base.View):
 class LibroDigitalView(base.View):
 
     def get(self, request, *args, **kwargs):
-        ctx = {
+        libros_digitales = LibroDigital.objects.all()
 
+        get_keys = request.GET.keys()
+
+        queries = [libros_digitales.query]
+
+        if 'autor' in get_keys:
+            libros_digitales = libros_digitales.filter(pk__in=Autor.objects.filter(nombre__icontains=request.GET['autor']).values('libros_digitales'))
+            queries.append(libros_digitales.query)
+
+        if 'titulo' in get_keys:
+            libros_digitales = libros_digitales.filter(titulo__icontains=request.GET['titulo'])
+            queries.append(libros_digitales.query)
+
+        ctx = {
+            'libros_digitales': libros_digitales,
+            'queries': []
         }
         return render(request, 'libro_digital.html', ctx)
 
@@ -171,8 +220,19 @@ class LibroDigitalView(base.View):
 class PeriodicoView(base.View):
 
     def get(self, request, *args, **kwargs):
-        ctx = {
+        periodicos = Periodicos.objects.all()
 
+        get_keys = request.GET.keys()
+
+        queries = [periodicos.query]
+
+        if 'nombre' in get_keys:
+            periodicos = periodicos.filter(nombre__icontains=request.GET['nombre'])
+            queries.append(periodicos.query)
+
+        ctx = {
+            'peridicos': periodicos,
+            'queries': []
         }
         return render(request, 'periodicos.html', ctx)
 
@@ -220,50 +280,3 @@ class AcercaDeNosotrosView(base.View):
 
         }
         return render(request, 'acerca_de_nosotros.html', ctx)
-
-
-        # class LoginView(base.View):
-        #
-        #     def get(self, request, *args, **kwargs):
-        #         """
-        #         :param request:
-        #         :param args:
-        #         :param kwargs:
-        #         :return:retorna el temaplate con la informacion del usuario logueado o retorna el template  de logueo
-        #         """
-        #         form = LoginForm()
-        #         ctx = {'formulario': form}
-        #         print form.as_p()
-        #         return render(request, 'pagina/desktop/index.html', ctx)
-        #
-        #     def post(self, request, *args, **kwargs):
-        #         """
-        #         :param request: username y un password
-        #         :param args:
-        #         :param kwargs:
-        #         :return: retorna el template del index de un usuario logueado o retorna un template de error de logueo
-        #         """
-        #         user = json.loads(request.body)  # Se debe decodificar haciendo uso de la clase json, ya que  es informacion
-        #         # suministrada  por un javascript.
-        #         form = LoginForm()
-        #         mensaje = "formulario invalido"
-        #         if form.is_valid():
-        #             username = form.cleaned_data['username']
-        #             password = form.cleaned_data['password']
-        #
-        #             try:
-        #                 username = Cuenta.objects.get(usuario=Usuario.objects.get(correo=username)).username
-        #             except Exception, e:
-        #                 pass
-        #
-        #             usuario = authenticate(username=username, password=password)
-        #             if usuario is not None and usuario.is_active:
-        #                 login(request, usuario)
-        #                 return HttpResponse("sucess")
-        #             else:
-        #                 mensaje = "usuario y/o password incorrecto"
-        #         return HttpResponseServerError(mensaje)
-        #
-        #     def delete(self, request, *args, **kwargs):
-        #         logout(request)
-        #         return HttpResponse('sucess')
