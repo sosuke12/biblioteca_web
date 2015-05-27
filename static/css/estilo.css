@@ -40,15 +40,15 @@ footer{
     background-color: #00b3ee;
 }
 
-ul li{
+.menu li{
     display: inline-block;
     color: white;
 }
 
-ul li a{
+.menu li a{
     color: white;
 }
 
-ul li a:hover{
+.menu li a:hover{
     color: white;
 }
