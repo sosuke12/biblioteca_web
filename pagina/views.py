@@ -128,22 +128,32 @@ class LibroView(base.View):
 
         get_keys = request.GET.keys()
 
+        input_values = {
+            'tema': '',
+            'autor': '',
+            'libro': ''
+        }
+
         queries = [libros.query]
 
         if 'autor' in get_keys:
             libros = libros.filter(pk__in=Autor.objects.filter(nombre__icontains=request.GET['autor']).values('libros'))
+            input_values['autor'] = request.GET['autor']
             queries.append(libros.query)
 
         if 'tema' in get_keys:
             libros = libros.filter(pk__in=Tema.objects.filter(nombre__icontains=request.GET['tema']).values('libros'))
+            input_values['tema'] = request.GET['tema']
             queries.append(libros.query)
 
         if 'libro' in get_keys:
             libros = libros.filter(titulo__icontains=request.GET['libro'])
+            input_values['libro'] = request.GET['libro']
             queries.append(libros.query)
 
         ctx = {
             'libros': libros,
+            'input_values': input_values,
             'queries': []
         }
         return render(request, 'libros.html', ctx)
@@ -164,19 +174,27 @@ class DocumentalView(base.View):
 
         get_keys = request.GET.keys()
 
+        input_values = {
+            'tema': '',
+            'titulo': ''
+        }
+
         if 'tema' in get_keys:
             documentales = documentales.filter(
                 pk__in=Tema.objects.filter(nombre__icontains=request.GET['tema']).values('documentales')
             )
+            input_values['tema'] = request.GET['tema']
             queries.append(documentales.query)
 
         if 'titulo' in get_keys:
             documentales = documentales.filter(titulo__icontains=request.GET['titulo'])
+            input_values['titulo'] = request.GET['titulo']
             queries.append(documentales.query)
 
         ctx = {
             'documentales': documentales,
-            'queries': queries
+            'input_values': input_values,
+            'queries': []
         }
         return render(request, 'documentales.html', ctx)
 
@@ -196,16 +214,24 @@ class LibroDigitalView(base.View):
 
         queries = [libros_digitales.query]
 
+        input_values = {
+            'autor': '',
+            'titulo': ''
+        }
+
         if 'autor' in get_keys:
             libros_digitales = libros_digitales.filter(pk__in=Autor.objects.filter(nombre__icontains=request.GET['autor']).values('libros_digitales'))
+            input_values['autor'] = request.GET['autor']
             queries.append(libros_digitales.query)
 
         if 'titulo' in get_keys:
             libros_digitales = libros_digitales.filter(titulo__icontains=request.GET['titulo'])
+            input_values['titulo'] = request.GET['titulo']
             queries.append(libros_digitales.query)
 
         ctx = {
             'libros_digitales': libros_digitales,
+            'input_values': input_values,
             'queries': []
         }
         return render(request, 'libro_digital.html', ctx)
@@ -224,14 +250,20 @@ class PeriodicoView(base.View):
 
         get_keys = request.GET.keys()
 
+        input_values = {
+            'nombre': ''
+        }
+
         queries = [periodicos.query]
 
         if 'nombre' in get_keys:
             periodicos = periodicos.filter(nombre__icontains=request.GET['nombre'])
+            input_values['nombre'] = request.GET['nombre']
             queries.append(periodicos.query)
 
         ctx = {
             'periodicos': periodicos,
+            'input_values': input_values,
             'queries': []
         }
         return render(request, 'periodicos.html', ctx)
