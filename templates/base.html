@@ -22,6 +22,11 @@
 
         </form>
     {% else %}
+        {% comment %}
+        Un formulario se compone de el metodo y la accion, la accion es la url donde se va a mandar la peticion y el
+        metodo es el metodo por el cual se va a mandar la peticion.
+        para enviar una peticion es necesario un boton de tipo submit
+        {% endcomment %}
         <form name="formulario_logueo"  method="post" action="/login/" class="elemento_logueo" style="width: 50%; text-align: right">
             {% csrf_token %}
             <p class="form-inline">

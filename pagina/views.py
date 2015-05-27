@@ -69,12 +69,13 @@ class RegitrarseView(base.View):
     def post(self, request, *args, **kwargs):
         print(request.POST)
         formulario = FormularioRegistro(request.POST)
+        print formulario.is_valid()
         if formulario.is_valid():
             usuario = None
             try:
                 usuario= User.objects.get(username=formulario.cleaned_data['DNI'])
             except Exception, e:
-                print e
+                pass
             if not usuario:
                 cleaned_data = formulario.cleaned_data
                 try:
@@ -107,6 +108,11 @@ class RegitrarseView(base.View):
 
                 user = User.objects.create_user(cleaned_data['DNI'], cleaned_data['Correo'], codigo)
 
+                return render(request, 'registro.html', ctx)
+            else:
+                ctx = {
+                    'error': 'El DNI ya ha sido registrado anteriormente'
+                }
                 return render(request, 'registro.html', ctx)
 
         ctx = {
