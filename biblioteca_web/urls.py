@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^/?$', views.IndexView.as_view(), name='index_url'),
     url(r'^login/?$', views.LoginView.as_view(), name='login_url'),
+    url(r'^logout/?$', views.LogOutView.as_view(), name='login_url'),
     url(r'^listar/libros/?$', views.LibroView.as_view(), name='libro_url'),
     url(r'^listar/documentales/?$', views.DocumentalView.as_view(), name='documental_url'),
     url(r'^listar/libros_digitales/?$', views.LibroDigitalView.as_view(), name='libro_digital_url'),

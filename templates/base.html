@@ -15,11 +15,14 @@
         <h1 class="titulo"> Biblioteca educativa</h1>
     </div>
     {% if user.is_authenticated %}
-        <div class="elemento_logueo" style="width: 50%; text-align: right; color: whitesmoke; height: 122px">
+        <form method="post"  action="/logout/" class="elemento_logueo" style="width: 50%; text-align: right; color: whitesmoke; height: 122px">
+            {% csrf_token %}
             Bienvenido, su codigo es {{ user.username }}
-        </div>
+            <button type="submit" class="btn btn-danger" style="background-color: #0089ae; color: whitesmoke"> Cerrar sesión</button>
+
+        </form>
     {% else %}
-        <form name="formulario_logueo"  method="post" action="/login" class="elemento_logueo" style="width: 50%; text-align: right">
+        <form name="formulario_logueo"  method="post" action="/login/" class="elemento_logueo" style="width: 50%; text-align: right">
             {% csrf_token %}
             <p class="form-inline">
                 <label for="username_id" style="margin-right: 9px"> Usuario : </label>
@@ -34,7 +37,7 @@
 
         </form>
         <p style="color: darkred">
-        {{ mensaje_login_error }}
+            {{ mensaje_login_error }}
         </p>
     {% endif %}
     <div>

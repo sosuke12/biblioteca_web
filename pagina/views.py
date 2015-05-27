@@ -52,6 +52,11 @@ class LoginView(base.View):
         }
         return render(request, 'index.html', ctx)
 
+class LogOutView(base.View):
+
+    def post(self, request, *args, **kwargs):
+        logout(request)
+        return render(request, 'index.html', {})
 
 class RegitrarseView(base.View):
 
