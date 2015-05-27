@@ -231,7 +231,7 @@ class PeriodicoView(base.View):
             queries.append(periodicos.query)
 
         ctx = {
-            'peridicos': periodicos,
+            'periodicos': periodicos,
             'queries': []
         }
         return render(request, 'periodicos.html', ctx)
