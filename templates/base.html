@@ -15,8 +15,12 @@
         <h1 class="titulo"> Biblioteca educativa</h1>
     </div>
     {% if user.is_authenticated %}
+        <div class="elemento_logueo" style="width: 50%; text-align: right; color: whitesmoke; height: 122px">
+            Bienvenido, su codigo es {{ user.username }}
+        </div>
     {% else %}
-        <form name="formulario_logueo"  class="elemento_logueo" style="width: 50%">
+        <form name="formulario_logueo"  method="post" action="/login" class="elemento_logueo" style="width: 50%; text-align: right">
+            {% csrf_token %}
             <p class="form-inline">
                 <label for="username_id" style="margin-right: 9px"> Usuario : </label>
                 <input name="username" id="username_id" type="text" class="form-control">
@@ -26,19 +30,25 @@
                 <input name="password" id="password_id" type="password" class="form-control">
             </p>
 
+            <button type="submit" class="btn" style="background-color: #0089ae; color: whitesmoke"> Ingresar</button>
+
         </form>
+        <p style="color: darkred">
+        {{ mensaje_login_error }}
+        </p>
     {% endif %}
     <div>
         <ul>
+            <li><a href="/">Inicio </a> | </li>
             {% if user.is_authenticated %}
                 <li><a href="/listar/libros/">Libros </a> | </li>
                 <li><a href="/listar/documentales/">Documentales </a> | </li>
                 <li><a href="/listar/libros_digitales/">Libros digitales </a> | </li>
-                <li><a href="/listar/periodico/">Periodicos</a></li>
+                <li><a href="/listar/periodicos/">Periodicos</a></li>
                 <li><a href="/prestamo/">Ver prestamo</a></li>
                 <li><a href="/multa/">Ver multa</a></li>
             {% else %}
-                <li><a href="/acerca_nosotros/">Acerca de nosotros</a> | </li>
+                <li><a href="/acerca_de_nosotros/">Acerca de nosotros</a> | </li>
                 <li><a href="/registrarse/">Registrarse</a></li>
             {% endif %}
         </ul>
@@ -47,10 +57,17 @@
 
 <div class="contenedor">
     {% block contenedor %}
-        <div class="col-lg-3" style="float: none; margin: 30px auto">
+        <div class="col-lg-5" style="float: none; margin: 30px auto; text-align: justify; color: rgb(127, 124, 124);">
+            <br>
+            <br>
+            <br>
+            <br>
             Bienvenido a la biblioteca educativa, aqui encontraras los libros disponibles para tu educacion por favor
             suministre los datos que sean requeridps para hacer la administración necesaria de la biblioteca de su
-            parte.
+            parte.<br>
+            Si ya se encuentra  registrado para loguearse solo necesita colocar su dni como usuario y el codigo de su
+            carnet como contraseña.
+
         </div>
     {% endblock %}
 </div>

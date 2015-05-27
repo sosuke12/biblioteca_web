@@ -54,7 +54,6 @@
       <exported-key name="fk_Autor_has_Documental_Documental1" table="Autor_has_Documental" schema="" catalog="biblioteca" columns="Documental_id_Documental"/>
       <exported-key name="fk_Documental_has_Tema_Documental1" table="Documental_has_Tema" schema="" catalog="biblioteca" columns="Documental_id_Documental"/>
       <exported-key name="fk_Prestamos_Documental1" table="Prestamos" schema="" catalog="biblioteca" columns="Documental_id_Documental"/>
-      <exported-key name="fk_Usuario_Documental1" table="Usuario" schema="" catalog="biblioteca" columns="Documental_id_Documental"/>
     </table>
     <table name="Documental_has_Tema" schema="" catalog="biblioteca" type="TABLE">
       <column name="Documental_id_Documental" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
@@ -140,7 +139,6 @@
       <column name="cantidad" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id_Periodicos"/>
       <exported-key name="fk_Prestamos_Periodicos1" table="Prestamos" schema="" catalog="biblioteca" columns="Periodicos_id_Periodicos"/>
-      <exported-key name="fk_Usuario_Periodicos1" table="Usuario" schema="" catalog="biblioteca" columns="Periodicos_id_Periodicos"/>
       <index name="Nombre_UNIQUE" unique="true" columns="Nombre"/>
     </table>
     <table name="Prestamos" schema="" catalog="biblioteca" type="TABLE">
@@ -176,18 +174,12 @@
       <column name="Nombre" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
       <column name="Carnet_id" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
       <column name="Correo" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
-      <column name="Documental_id_Documental" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="Periodicos_id_Periodicos" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id_Usuario"/>
-      <foreign-key name="fk_Usuario_Documental1" columns="Documental_id_Documental" ref-table="Documental" ref-schema="" ref-catalog="biblioteca" ref-columns="id_Documental" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="fk_Usuario_Periodicos1" columns="Periodicos_id_Periodicos" ref-table="Periodicos" ref-schema="" ref-catalog="biblioteca" ref-columns="id_Periodicos" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="fk_Carnet_Usuario1" table="Carnet" schema="" catalog="biblioteca" columns="Usuario_id_Usuario"/>
       <exported-key name="fk_Prestamos_Usuario" table="Prestamos" schema="" catalog="biblioteca" columns="Usuario_id_Usuario"/>
       <index name="Carnet_id_UNIQUE" unique="true" columns="Carnet_id"/>
       <index name="Correo_UNIQUE" unique="true" columns="Correo"/>
       <index name="DNI_UNIQUE" unique="true" columns="DNI"/>
-      <index name="fk_Usuario_Documental1_idx" unique="false" columns="Documental_id_Documental"/>
-      <index name="fk_Usuario_Periodicos1_idx" unique="false" columns="Periodicos_id_Periodicos"/>
     </table>
     <table name="auth_group" schema="" catalog="biblioteca" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>

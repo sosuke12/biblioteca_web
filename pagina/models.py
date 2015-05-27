@@ -37,7 +37,7 @@ class AutorHasLibro(models.Model):
 
 
 class Carnet(models.Model):
-    id_carnet = models.IntegerField(db_column='id_Carnet', primary_key=True)  # Field name made lowercase.
+    id_carnet = models.AutoField(db_column='id_Carnet', primary_key=True)  # Field name made lowercase.
     codigo = models.CharField(db_column='Codigo', max_length=45, blank=True, null=True)  # Field name made lowercase.
     usuario_id_usuario = models.OneToOneField('Usuario', db_column='Usuario_id_Usuario')  # Field name made lowercase.
 
@@ -188,9 +188,7 @@ class Usuario(models.Model):
     dni = models.CharField(db_column='DNI', unique=True, max_length=15)  # Field name made lowercase.
     nombre = models.CharField(db_column='Nombre', max_length=60)  # Field name made lowercase.
     carnet_id = models.CharField(db_column='Carnet_id', unique=True, max_length=45, blank=True, null=True)  # Field name made lowercase.
-    correo = models.CharField(db_column='Correo', unique=True, max_length=45, blank=True, null=True)  # Field name made lowercase.
-    documental_id_documental = models.ForeignKey(Documental, db_column='Documental_id_Documental')  # Field name made lowercase.
-    periodicos_id_periodicos = models.ForeignKey(Periodicos, db_column='Periodicos_id_Periodicos')  # Field name made lowercase.
+    correo = models.EmailField(db_column='Correo', unique=True, max_length=45, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         

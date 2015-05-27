@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^registrarse/?$', views.RegitrarseView.as_view(), name='registro_url'),
     url(r'^multa/?$', views.MultaView.as_view(), name='registro_url'),
     url(r'^prestamo/?$', views.PrestamoView.as_view(), name='registro_url'),
+    url(r'^acerca_de_nosotros/?$', views.AcercaDeNosotrosView.as_view(), name='registro_url'),
 ]

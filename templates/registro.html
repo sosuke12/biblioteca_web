@@ -1,1 +1,52 @@
 {% extends 'base.html' %}
+
+
+{% block contenedor %}
+    <br>
+    <br>
+
+    {% if registrado %}
+        <div class="alert-success" style="margin: 0 auto; text-align: center; width: 60%;">
+            <span class="glyphicon glyphicon-check " style="text-align: center"></span><br>
+            <p style="display: inline-block">
+                Su usuario ha sido creado con el carnet correpondiente y con codigo : {{ codigo }}
+            </p>
+        </div>
+    {% else %}
+        {% if error %}
+            <div class="alert-danger" style="margin: 0 auto; text-align: center; width: 60%;">
+               <br>
+                <p style="display: inline-block">
+                    Error : {{ error }}.
+                </p>
+
+                <br>
+                <br>
+            </div>
+                <br>
+        {% endif %}
+        <div class="alert-info col-lg-3"  style="text-align: justify; border: 10px">
+            <span class="glyphicon-alert" style="text-align: center"></span><br>
+            Se le informa que al crear el usuario se le asignara inmediatamente un carnet el cual podra reclamar con el codigo
+            que se mostrara al registrarse, porfavor ingrese la informacion correspondiente
+        </div>
+
+        <form action="/registrarse/" method="post" class="col-lg-6 center-block">
+            {% csrf_token %}
+            <p>
+                <label for="DNI_id"> Dni : </label>
+                <input type="number" class="form-control" name="DNI" id="DNI_id" required>
+            </p>
+            <p>
+                <label for="NOMBRE_id"> Nombre : </label>
+                <input  type="text" class="form-control" name="Nombre" id="NOMBRE_id" required>
+            </p>
+            <p>
+                <label for="CORREO_id"> Correo : </label>
+                <input  type="email" class="form-control" name="Correo" id="CORREO_id" required>
+            </p>
+            <button type="submit" class="btn btn-primary"> Crear</button>
+        </form>
+    {% endif %}
+
+{% endblock %}
